@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Check the number of arguments
+if [ $# -eq 0 ]; then
+  # No arguments, prompt for input
+  read -p "Enter URL to generate SHA256 hash: " URL
+  curl -fsSL "$URL" | tee | sha256sum
+else
+  # Arguments given, loop through them
+  for URL in "$@"; do
+    curl -fsSL "$URL" | tee | sha256sum
+  done
+fi
